@@ -219,15 +219,21 @@
             <p class="reveal mt-2" style="color:#9aa5ae;max-width:560px;">Every DONGSHENG® product is made in our own factory — vertical integration from raw yarn to finished hose reel keeps quality consistent and prices factory-direct.</p>
           </div>
           <div class="reveal">
-            <div class="video-wrap">
-              <video controls preload="none" poster="https://sc02.alicdn.com/kf/H8f4245711346481982e16016b97c5605e.jpg">
+            <div class="video-wrap" id="factoryVideo">
+              <img class="v-poster" src="https://sc02.alicdn.com/kf/H8f4245711346481982e16016b97c5605e.jpg" alt="DONGSHENG factory tour preview" loading="lazy">
+              <div class="v-play" role="button" aria-label="Play factory tour video" tabindex="0">
+                <span class="pbtn">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+                </span>
+              </div>
+              <video controls preload="none" playsinline>
                 <source src="assets/videos/factory-tour.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
             </div>
             <div class="video-cap">
               <span class="v-title">Factory Tour — Full Production Chain</span>
-              <span class="v-sub">50,000m daily capacity · 43s</span>
+              <span class="v-sub">50,000m daily capacity · 43s · click to play</span>
             </div>
           </div>
         </div>

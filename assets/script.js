@@ -79,6 +79,29 @@
       }
     }
 
+    // Click-to-play video (cover + play button, load mp4 on demand)
+    var videoWraps = document.querySelectorAll(".video-wrap");
+    for (var vw = 0; vw < videoWraps.length; vw++) {
+      (function (wrap) {
+        var trigger = wrap.querySelector(".v-play, .v-poster");
+        var video = wrap.querySelector("video");
+        if (!trigger || !video) return;
+        function start() {
+          wrap.classList.add("playing");
+          video.load();
+          var p = video.play();
+          if (p && p.catch) p.catch(function () { /* autoplay fallback */ });
+        }
+        trigger.addEventListener("click", start);
+        trigger.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); start(); }
+        });
+        video.addEventListener("pause", function () {
+          if (video.ended) { wrap.classList.remove("playing"); }
+        });
+      })(videoWraps[vw]);
+    }
+
     // Product filter tabs (homepage)
     var filterTabs = document.querySelectorAll(".filter-tab");
     var productCards = document.querySelectorAll(".product-card[data-cat]");

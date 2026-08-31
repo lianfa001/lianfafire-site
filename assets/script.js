@@ -79,6 +79,24 @@
       }
     }
 
+    // Product filter tabs (homepage)
+    var filterTabs = document.querySelectorAll(".filter-tab");
+    var productCards = document.querySelectorAll(".product-card[data-cat]");
+    if (filterTabs.length && productCards.length) {
+      for (var ft = 0; ft < filterTabs.length; ft++) {
+        filterTabs[ft].addEventListener("click", function () {
+          var f = this.getAttribute("data-filter");
+          for (var t = 0; t < filterTabs.length; t++) {
+            filterTabs[t].classList.toggle("active", filterTabs[t] === this);
+          }
+          for (var pc = 0; pc < productCards.length; pc++) {
+            var show = f === "all" || productCards[pc].getAttribute("data-cat") === f;
+            productCards[pc].style.display = show ? "" : "none";
+          }
+        });
+      }
+    }
+
     // FAQ accordion
     var faqItems = document.querySelectorAll(".faq-item");
     for (var f = 0; f < faqItems.length; f++) {

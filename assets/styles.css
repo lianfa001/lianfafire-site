@@ -350,3 +350,73 @@ h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.12; letter-spacin
 .pd-features li::before { content: "✓"; color: var(--red); font-weight: 800; }
 
 .chip { display: inline-block; background: rgba(212,38,47,0.08); color: var(--red-dark); font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 100px; margin: 0 8px 8px 0; }
+
+/* ============ HIMANN-inspired upgrades (v1.1) ============ */
+
+/* Product filter tabs */
+.filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin: 30px 0 34px; }
+.filter-tab {
+  padding: 10px 22px; border-radius: 100px; border: 1.5px solid var(--line);
+  background: #fff; font-family: var(--font-head); font-size: 15px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.25s;
+  color: var(--ink-2);
+}
+.filter-tab:hover { border-color: var(--red); color: var(--red); }
+.filter-tab.active { background: var(--red); border-color: var(--red); color: #fff; box-shadow: 0 6px 16px rgba(212,38,47,0.3); }
+
+/* Product model badge (e.g. #8-65-25) */
+.p-model {
+  position: absolute; top: 14px; right: 14px; z-index: 2;
+  background: rgba(19,24,29,0.82); color: #fff; font-family: var(--font-head);
+  font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+  padding: 5px 12px; border-radius: 100px; backdrop-filter: blur(3px);
+}
+
+/* Manufacturing pride strip (steps) */
+.pride { background: var(--ink); color: #fff; padding: 84px 0; position: relative; overflow: hidden; }
+.pride::before {
+  content: ""; position: absolute; inset: 0; opacity: 0.5;
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 18px);
+}
+.pride .container { position: relative; z-index: 2; }
+.pride-tag { color: var(--amber); font-family: var(--font-head); font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 12px; display: block; }
+.pride h2 { font-size: clamp(30px, 4.4vw, 52px); text-transform: uppercase; max-width: 720px; }
+.pride h2 em { font-style: normal; color: var(--red); }
+.pride-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 48px; counter-reset: step; }
+.pride-step { padding: 0 18px; position: relative; }
+.pride-step::before {
+  content: counter(step, decimal-leading-zero); counter-increment: step;
+  font-family: var(--font-head); font-size: 30px; font-weight: 700; color: var(--red);
+  display: block; margin-bottom: 8px;
+}
+.pride-step::after { content: ""; position: absolute; top: 14px; right: 0; width: 1px; height: 30px; background: rgba(255,255,255,0.18); }
+.pride-step:last-child::after { display: none; }
+.pride-step h3 { font-size: 17px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 5px; }
+.pride-step p { font-size: 13px; color: #9aa5ae; line-height: 1.5; }
+@media (max-width: 900px) { .pride-steps { grid-template-columns: repeat(2, 1fr); row-gap: 26px; } .pride-step::after { display: none; } }
+@media (max-width: 560px) { .pride-steps { grid-template-columns: 1fr; } }
+
+/* Certification badges */
+.cert-band { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 26px 0; }
+.cert-row { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.cert-item {
+  display: inline-flex; align-items: center; gap: 9px; padding: 9px 18px;
+  background: #fff; border: 1px solid var(--line); border-radius: 100px;
+  font-family: var(--font-head); font-size: 14px; font-weight: 700; letter-spacing: 0.06em;
+  color: var(--ink-2); text-transform: uppercase;
+}
+.cert-item .ck { color: var(--red); font-size: 15px; }
+
+/* Video block */
+.video-wrap { position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: #000; box-shadow: var(--shadow); }
+.video-wrap video { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; }
+.video-cap { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-top: 12px; flex-wrap: wrap; }
+.video-cap .v-title { font-family: var(--font-head); font-size: 18px; text-transform: uppercase; }
+.video-cap .v-sub { font-size: 13.5px; color: var(--muted); }
+
+/* Data strip (global network) */
+.data-band { background: linear-gradient(120deg, var(--red-deep), var(--red)); color: #fff; padding: 44px 0; }
+.data-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+.data-cell b { font-family: var(--font-head); font-size: clamp(30px, 3.6vw, 46px); display: block; }
+.data-cell span { font-size: 13.5px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; }
+@media (max-width: 760px) { .data-grid { grid-template-columns: repeat(2, 1fr); } }

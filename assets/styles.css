@@ -73,8 +73,8 @@ h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.12; letter-spacin
 .btn-red:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 12px 26px rgba(212, 38, 47, 0.35); }
 .btn-amber { background: var(--amber); color: var(--ink); }
 .btn-amber:hover { background: #e8951a; transform: translateY(-2px); }
-.btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,0.45); }
-.btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+.btn-ghost { background: rgba(255,255,255,0.06); color: #fff; border-color: #ffffff; }
+.btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.16); }
 .btn-dark { background: var(--ink); color: #fff; }
 .btn-dark:hover { background: var(--ink-2); }
 .btn-lg { padding: 18px 40px; font-size: 19px; }
@@ -156,8 +156,8 @@ h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.12; letter-spacin
 .hero {
   position: relative; color: #fff; overflow: hidden;
   background:
-    linear-gradient(115deg, rgba(13,17,21,0.96) 0%, rgba(19,24,29,0.88) 55%, rgba(212,38,47,0.55) 100%),
-    repeating-linear-gradient(45deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 14px),
+    linear-gradient(115deg, rgba(17,22,27,0.82) 0%, rgba(23,30,37,0.72) 55%, rgba(180,28,38,0.72) 100%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 16px),
     var(--ink);
 }
 .hero::after {
@@ -175,7 +175,7 @@ h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.12; letter-spacin
 }
 .hero-tag .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); animation: pulse 1.6s infinite; }
 
-.hero h1 { font-size: clamp(42px, 6.4vw, 78px); font-weight: 700; text-transform: uppercase; max-width: 780px; }
+.hero h1 { font-size: clamp(42px, 6.4vw, 78px); font-weight: 700; text-transform: uppercase; max-width: 780px; color: #ffffff; text-shadow: 0 2px 24px rgba(0,0,0,0.35); }
 .hero h1 .hl { color: var(--amber); }
 .hero p { font-size: 18.5px; max-width: 620px; margin: 22px 0 34px; color: #d9dee3; }
 .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
@@ -312,8 +312,9 @@ h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.12; letter-spacin
 .page-hero h1 { font-size: clamp(36px, 5vw, 58px); text-transform: uppercase; }
 .page-hero p { color: #c2cad1; max-width: 620px; margin-top: 14px; font-size: 17px; }
 
-/* ---------- Reveal animation ---------- */
-.reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+/* ---------- Reveal animation ----------
+   Content is visible by default (robustness: never hide content behind JS). */
+.reveal { opacity: 1; transform: none; }
 .reveal.visible { opacity: 1; transform: none; }
 
 /* ---------- Footer ---------- */

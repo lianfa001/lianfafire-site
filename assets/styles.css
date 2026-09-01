@@ -566,3 +566,18 @@ html.lenis, html.lenis body { height: auto; }
 .topbar { background: var(--ink); }
 .header { background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); }
 .logo-mark { background: linear-gradient(135deg, #1d2a31, #14232b); color: var(--gold); }
+
+/* ============ Certificate showcase (v2.1) ============ */
+.cert-showcase {
+  background: #fff; border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow); border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  padding: 26px; aspect-ratio: 3 / 4;
+}
+.cert-showcase img {
+  max-width: 100%; max-height: 100%; width: auto; height: auto;
+  object-fit: contain; display: block;
+}
+.cert-cap { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-top: 12px; flex-wrap: wrap; }
+.cert-cap .v-title { font-family: var(--font-head); font-size: 18px; color: #fff; }
+.cert-cap .v-meta { font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.55); }

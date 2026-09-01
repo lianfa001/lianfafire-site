@@ -198,28 +198,43 @@
       reveals.forEach(function (el) { io.observe(el); });
     }
 
-    // Contact form (mailto fallback — no backend)
+    // Contact form — submits to lianfafire@163.com via FormSubmit (no backend)
     var form = document.getElementById("contactForm");
     if (form) {
       form.addEventListener("submit", function (e) {
         e.preventDefault();
-        var name = document.getElementById("cf_name").value.trim();
-        var email = document.getElementById("cf_email").value.trim();
-        var msg = document.getElementById("cf_msg").value.trim();
-        var subject = encodeURIComponent("[Inquiry] " + (document.getElementById("cf_product").value || "Fire Equipment"));
-        var body = encodeURIComponent(
-          "Name: " + name + "\n" +
-          "Company: " + document.getElementById("cf_company").value + "\n" +
-          "Email: " + email + "\n" +
-          "Phone/WhatsApp: " + document.getElementById("cf_phone").value + "\n" +
-          "Country: " + document.getElementById("cf_country").value + "\n" +
-          "Product: " + document.getElementById("cf_product").value + "\n\n" +
-          msg
-        );
+        var btn = form.querySelector('button[type="submit"]');
         var sent = document.getElementById("formSent");
-        if (sent) sent.style.display = "block";
-        window.location.href = "mailto:lianfafire@163.com?subject=" + subject + "&body=" + body;
-        form.reset();
+        var data = new FormData(form);
+        var name = document.getElementById("cf_name").value.trim() || "website visitor";
+        var email = document.getElementById("cf_email").value.trim();
+        data.append("_subject", "New inquiry from " + name + " — DONGSHENG website");
+        data.append("_captcha", "false");
+        data.append("_template", "table");
+        if (email) data.append("_replyto", email);
+        if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
+        fetch("https://formsubmit.co/ajax/lianfafire@163.com", {
+          method: "POST",
+          body: data,
+          headers: { "Accept": "application/json" }
+        })
+        .then(function (r) {
+          if (!r.ok) throw new Error("submit failed");
+          return r.json();
+        })
+        .then(function () {
+          if (sent) sent.style.display = "block";
+          form.reset();
+        })
+        .catch(function () {
+          if (sent) {
+            sent.textContent = "Sending failed. Please email us directly: lianfafire@163.com";
+            sent.style.display = "block";
+          }
+        })
+        .finally(function () {
+          if (btn) { btn.disabled = false; btn.textContent = "Send Inquiry"; }
+        });
       });
     }
   });

@@ -26,7 +26,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* native smooth scroll disabled — Lenis provides damped smooth scrolling */
 
 body {
   font-family: var(--font-body);
@@ -313,9 +313,23 @@ h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.12; letter-spacin
 .page-hero p { color: #c2cad1; max-width: 620px; margin-top: 14px; font-size: 17px; }
 
 /* ---------- Reveal animation ----------
-   Content is visible by default (robustness: never hide content behind JS). */
+   Content is visible by default (robustness: never hide content behind JS).
+   JS adds .reveal-pre only when IntersectionObserver is available, enabling
+   a damped fade-up on scroll without risking blank content. */
 .reveal { opacity: 1; transform: none; }
-.reveal.visible { opacity: 1; transform: none; }
+.reveal.reveal-pre {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.reveal-pre.visible { opacity: 1; transform: none; }
+
+/* Lenis smooth-scroll (damped inertia) */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
 
 /* ---------- Footer ---------- */
 .footer { background: var(--ink); color: #aeb7bf; padding: 70px 0 0; font-size: 14.5px; }

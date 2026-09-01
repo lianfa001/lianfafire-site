@@ -44,8 +44,37 @@
     if (togg) togg.setAttribute("aria-expanded", "false");
   }
 
+  // Lenis smooth scroll (damped inertia) — progressive enhancement, fails silent
+  function initLenis() {
+    if (!window.Lenis) return;
+    var lenis = new window.Lenis({ lerp: 0.1, wheelMultiplier: 1, smoothWheel: true });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    var anchors = document.querySelectorAll('a[href^="#"]');
+    for (var ai = 0; ai < anchors.length; ai++) {
+      (function (a) {
+        a.addEventListener("click", function (e) {
+          var id = a.getAttribute("href");
+          if (id && id.length > 1) {
+            var target = document.querySelector(id);
+            if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -80 }); }
+          }
+        });
+      })(anchors[ai]);
+    }
+  }
+  function loadLenis() {
+    if (window.Lenis) { initLenis(); return; }
+    var s = document.createElement("script");
+    s.src = "https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js";
+    s.onload = initLenis;
+    s.onerror = function () { /* smooth scroll unavailable */ };
+    document.head.appendChild(s);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     applyLang(lang);
+    loadLenis();
 
     // Language switcher
     var langBtn = document.querySelector(".lang-btn");
@@ -141,17 +170,18 @@
       })(faqItems[f]);
     }
 
-    // Reveal on scroll
+    // Reveal on scroll — damped fade-up, progressive enhancement.
+    // Elements are visible by default; we only add the hidden state when IO
+    // is available, so a JS/IO failure can never produce blank content.
     var reveals = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window && reveals.length) {
+      for (var r = 0; r < reveals.length; r++) reveals[r].classList.add("reveal-pre");
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
           if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); }
         });
-      }, { threshold: 0.12 });
+      }, { threshold: 0.1, rootMargin: "0px 0px -8% 0px" });
       reveals.forEach(function (el) { io.observe(el); });
-    } else {
-      reveals.forEach(function (el) { el.classList.add("visible"); });
     }
 
     // Contact form (mailto fallback — no backend)

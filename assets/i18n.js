@@ -13,7 +13,7 @@ window.I18N = {
     "hero.titleHl": "from China's Factory",
     "hero.sub": "DONGSHENG® — 15+ years manufacturing fire hoses and agricultural water belts. 50,000+ meters daily capacity, full in-house production from spinning yarn to assembled hose reels.",
     "hero.cta1": "Request a Quote",
-    "hero.cta2": "View Products",
+    "hero.cta2": "Explore Products",
     "stat.daily": "Daily Output",
     "stat.years": "Years Experience",
     "stat.meters": "Meters / Day",
